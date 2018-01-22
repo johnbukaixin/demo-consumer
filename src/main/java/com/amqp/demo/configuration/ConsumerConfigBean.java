@@ -1,10 +1,11 @@
 package com.amqp.demo.configuration;
 
-import com.amqp.demo.consumer.TopicConsumerConfiguration;
 import org.springframework.amqp.core.AcknowledgeMode;
+import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.annotation.RabbitListenerConfigurer;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
 import org.springframework.amqp.rabbit.listener.MessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistrar;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
@@ -25,6 +26,9 @@ public class ConsumerConfigBean implements RabbitListenerConfigurer{
 
     @Autowired
     private PropertiesConfiguration configuration;
+
+    @Autowired
+    private MessageListener messageListener;
 
     @Bean
     public DefaultMessageHandlerMethodFactory myHandlerMethodFactory() {
@@ -50,7 +54,7 @@ public class ConsumerConfigBean implements RabbitListenerConfigurer{
         container.setConnectionFactory(connectionFactory);
         //设置需要监听的队列，值为配置文件中配置的队列名称
         container.setQueueNames(configuration.parseConfigQueueName());
-        container.setMessageListener(TopicConsumerConfiguration.exampleListener1());
+        container.setMessageListener(messageListener);
         container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         return container;
     }
