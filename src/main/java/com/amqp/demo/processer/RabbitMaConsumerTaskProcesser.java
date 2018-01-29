@@ -18,9 +18,9 @@ public class RabbitMaConsumerTaskProcesser extends AbstractMessageProcesser {
 
     @Override
     public boolean processMessage(Message message) {
-        if (message.getMessageProperties().getDeliveryTag()%2 == 0){
-            return true;
-        }
-        return false;
+        int i = 0; int c = 0;
+        int b = i/c;
+        System.out.println("idea:"+message.getMessageProperties().getMessageId() +new String(message.getBody()));
+        return true;
     }
 }

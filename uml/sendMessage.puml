@@ -1,0 +1,37 @@
+@startuml
+
+interface SendMessageStrategy
+
+
+SendMessageStrategy <|-- AbstractSendMessageStrategy
+AbstractSendMessageStrategy <|-- sendMessageStrategy
+AbstractSendMessageStrategy <|-- CardSendMessageStrategy
+AbstractSendMessageStrategy <|-- BatchSendMessageStrategy
+
+
+
+abstract class AbstractSendMessageStrategy {
+   +send(BaseParam param);
+   ~build(param);
+   ~sendMessage(param);
+}
+
+
+class sendMessageStrategy{
+   +send(BaseParam param);
+   ~build(param);
+   ~sendMessage(param);
+}
+
+class CardSendMessageStrategy{
+   +send(BaseParam param);
+   ~build(param);
+   ~sendMessage(param);
+}
+
+class BatchSendMessageStrategy{
+   +send(BaseParam param);
+   ~build(param);
+   ~sendMessage(param);
+}
+@enduml

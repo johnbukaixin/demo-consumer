@@ -30,7 +30,7 @@ public abstract class AbstractMessageListener implements ChannelAwareMessageList
     private Jackson2JsonMessageConverter messageConverter;
 
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate redisTemplate;
 
     /**
      * 接收消息，子类必须实现该方法

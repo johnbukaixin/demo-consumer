@@ -1,14 +1,14 @@
 package com.amqp.demo.configuration;
 
+import com.amqp.demo.listener.MessageListener;
 import org.springframework.amqp.core.AcknowledgeMode;
-import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.annotation.RabbitListenerConfigurer;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
 import org.springframework.amqp.rabbit.listener.MessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistrar;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,6 +57,12 @@ public class ConsumerConfigBean implements RabbitListenerConfigurer{
         container.setMessageListener(messageListener);
         container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         return container;
+    }
+
+    @Bean
+    public Jackson2JsonMessageConverter jackson2JsonMessageConverter() {
+        Jackson2JsonMessageConverter jsonMessageConverter = new Jackson2JsonMessageConverter();
+        return jsonMessageConverter;
     }
 
 
